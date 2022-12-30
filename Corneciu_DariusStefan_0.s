@@ -29,15 +29,12 @@ matrix_mult:
 	mov %esp,%ebp
 	pushl %ebx
 	pushl %edi
-	pushl %edx
-	pushl %ecx
 	subl $24,%esp
-	
+
 	mov 8(%ebp),%ebx
 	mov 12(%ebp),%edi
 	mov 16(%ebp),%edx 
 	mov 20(%ebp),%ecx
-	
 	movl $0,-20(%ebp)
 	
 	for_iii:
@@ -97,11 +94,8 @@ matrix_mult:
 		incl -20(%ebp)
 		jmp for_iii
 	
-	
 	pro_exit:
 	addl $24,%esp
-	popl %ecx
-	popl %edx
 	popl %edi
 	popl %ebx
 	popl %ebp
