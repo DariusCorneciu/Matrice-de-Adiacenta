@@ -7,7 +7,7 @@
 	mres: .space 40000
 	scan: .asciz "%ld\n"
 	print: .asciz "%ld "
-	pcer: .asciz "Numarul de drumuri de lungime l este %ld \n"
+	pcer: .asciz "%ld \n"
 	endl: .asciz "\n"
 	cerinta: .space 4
 	n: .space 4
@@ -29,8 +29,7 @@ matrix_mult:
 	mov %esp,%ebp
 	pushl %ebx
 	pushl %edi
-	subl $24,%esp
-
+	subl $24,%esp	
 	mov 8(%ebp),%ebx
 	mov 12(%ebp),%edi
 	mov 16(%ebp),%edx 
@@ -159,7 +158,7 @@ fout2:
 	for_i:
 		movl index,%ebx
 		cmp %ebx,n
-		je afis
+		je verificare2
 		cmp $0,%ebx
 		jne cresc
 		
@@ -198,6 +197,11 @@ cresc:
 cre_i:
 	incl index
 	jmp for_i
+	
+verificare2:
+	movl cerinta,%ebx
+	cmp $2,%ebx
+	je cerinta2
 		
 afis:
 	movl $0,index
@@ -205,7 +209,7 @@ afis:
 	for_index:
 		movl index,%ecx
 		cmp %ecx,n
-		je cerinta2
+		je exit
 		
 	movl $0,jndex
 	for_jndex:
@@ -243,9 +247,6 @@ afis:
 		jmp for_index
 
 cerinta2:
-	movl cerinta,%ebx
-	cmp $1,%ebx
-	je exit
 	
 	pushl $lun
 	pushl $scan
@@ -316,9 +317,6 @@ cerinta2:
 	
 	
 	afis2:
-		pushl $0
-		call fflush
-		pop %ebx
 		
 		lea mres,%edi
 		movl ns,%eax
